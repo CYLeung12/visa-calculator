@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { type } from "os";
+import React, { useState } from "react";
+import ReactCreate from "./components/RecordCreate";
+import { LeavingRecord } from "./LeavingRecordType";
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [records, setRecords] = useState<LeavingRecord[]>([]);
+    
+    const createRecrod = (leaveDate: Date, entryDate: Date) => {
+        console.log(`leaveDate: ${leaveDate}, entryDate: ${entryDate}`)
+    }
+
+
+    return <div>
+        <ReactCreate onCreate={ createRecrod } />
+    </div>;
 }
 
 export default App;
