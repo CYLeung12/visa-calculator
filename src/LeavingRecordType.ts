@@ -1,11 +1,11 @@
 export type LeavingRecord = {
     id: number;
-    leaveDate?: Date;
+    exitDate?: Date;
     entryDate?: Date;
     dateDifference: number;
 }
 
 export type DateType = {
-    leaveDate?: Date;
+    exitDate?: Date;
     entryDate?: Date;
 }
