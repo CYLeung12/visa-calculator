@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import ReactCreate from "./components/RecordCreate";
+import RecordCreate from "./components/RecordCreate";
 import { LeavingRecord } from "./LeavingRecordType";
 import Nav from "./components/Nav";
+import RecordList from "./components/RecordList";
 
 function App() {
   const [records, setRecords] = useState<LeavingRecord[]>([]);
 
   const createRecrod = (
     exitDate: Date | undefined,
-    entryDate: Date | undefined
+    entryDate: Date | undefined,
+    description: string
   ) => {
     console.log(`exitDate: ${exitDate}, entryDate: ${entryDate}`);
     let id = 0;
@@ -22,6 +24,7 @@ function App() {
       id: id,
       exitDate: exitDate,
       entryDate: entryDate,
+      description: description,
       dateDifference: countDateDiff(exitDate, entryDate),
     };
 
@@ -47,8 +50,9 @@ function App() {
     <div>
       <Nav />
       <div className="container mx-auto px-20">
-        <ReactCreate onCreate={createRecrod} />
+        <RecordCreate onCreate={createRecrod} />
         <div>{records.length}</div>
+        <RecordList records={records} />
       </div>
     </div>
   );

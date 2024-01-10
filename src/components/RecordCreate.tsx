@@ -4,19 +4,29 @@ import { DateType } from "../LeavingRecordType";
 import moment from "moment";
 
 type ReactCreateProps = {
-  onCreate: (exitDate: Date | undefined, entryDate: Date | undefined) => void;
+  onCreate: (
+    exitDate: Date | undefined,
+    entryDate: Date | undefined,
+    description: string
+  ) => void;
 };
 
 const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
   const [dates, setDates] = useState<DateType>();
+  const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
-  const handleChange = (event: ChangeEvent) => {
+  const handleDateChange = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     setDates((prev) => ({
       ...prev,
       [target.name]: moment(new Date(target.value)).format("YYYY-MM-DD"),
     }));
+  };
+
+  const handleDescriptionChange = (event: ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setDescription(target.value);
   };
 
   const handleAddButton = (event: FormEvent<HTMLElement>) => {
@@ -26,8 +36,9 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
     } else if (dates.entryDate < dates.exitDate) {
       setError("Date of Exit cannot be earlier than the Date of Entry");
     }
-    onCreate(dates!.exitDate, dates!.entryDate);
+    onCreate(dates!.exitDate, dates!.entryDate, description);
     setDates(undefined);
+    setDescription("");
   };
 
   const dateValue = (date: Date | undefined): string => {
@@ -77,7 +88,7 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
             className="bg-gray-50 border border-gray-300 rounded p-1 block text-gray-700 text-sm font-bold mb-2"
             value={dateValue(dates?.exitDate)}
             onClick={clearState}
-            onChange={handleChange}
+            onChange={handleDateChange}
             type="date"
             name="exitDate"
             id="exitDate"
@@ -93,13 +104,13 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="entryDate"
           >
-            Date of Entering the UK{" "}
+            Date of Entering the UK
           </label>
           <input
             className="bg-gray-50 border border-gray-300 rounded p-1 block text-gray-700 text-sm font-bold mb-2"
             value={dateValue(dates?.entryDate)}
             onClick={clearState}
-            onChange={handleChange}
+            onChange={handleDateChange}
             type="date"
             name="entryDate"
             id="entryDate"
@@ -108,6 +119,21 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
                 ? undefined
                 : moment(dates.exitDate).format("YYYY-MM-DD")
             }
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="entryDate"
+          >
+            Description (Optional)
+          </label>
+          <textarea
+            className="bg-gray-50 border border-gray-300 rounded p-1 block text-gray-700 text-sm font-bold mb-2"
+            value={description}
+            onChange={handleDescriptionChange}
+            name="description"
+            id="description"
           />
         </div>
         <input
