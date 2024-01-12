@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/visa-calculator/static/css/main.fdfa25a3.css",
+    "main.js": "/visa-calculator/static/js/main.7a7f28b1.js",
+    "static/media/logo.png": "/visa-calculator/static/media/logo.36226e88e716a601f82a.png",
+    "index.html": "/visa-calculator/index.html",
+    "main.fdfa25a3.css.map": "/visa-calculator/static/css/main.fdfa25a3.css.map",
+    "main.7a7f28b1.js.map": "/visa-calculator/static/js/main.7a7f28b1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fdfa25a3.css",
+    "static/js/main.7a7f28b1.js"
+  ]
+}
