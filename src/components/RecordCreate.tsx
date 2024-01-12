@@ -73,7 +73,7 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
   };
 
   return (
-    <div>
+    <div className="py-6">
       <h3 className="text-blue-700 text-xl font-bold text-blue-700 py-3">
         Add a Travel Recrod
       </h3>
@@ -143,7 +143,6 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
         />
         {error && showError(error)}
       </form>
-      <p>{`${dates?.exitDate} ${dates?.entryDate}`}</p>
     </div>
   );
 };

@@ -5,11 +5,12 @@ import RecordShow from "./RecordShow";
 
 type RecordListProps = {
   records: LeavingRecord[];
+  onDelete: (id: number) => void;
 };
 
-const RecordList: React.FC<RecordListProps> = ({ records }) => {
+const RecordList: React.FC<RecordListProps> = ({ records, onDelete }) => {
   const listRecrods = records.map((r, index) => (
-    <RecordShow leavingRecord={r} index={index} />
+    <RecordShow leavingRecord={r} index={index} onDelete={onDelete} />
   ));
 
   return (

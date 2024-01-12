@@ -34,7 +34,7 @@ const DataDisplay: React.FC<DataDisplayType> = ({ records }) => {
           </span>
           <span className="font-bold text-blue-700">26 January 2024</span>
           <p className="text-sm">
-            (There may be another periods with the same total absence date)
+            (There may be another periods with the same total absence days)
           </p>
         </div>
       </div>

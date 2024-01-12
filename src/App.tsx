@@ -20,7 +20,6 @@ function App() {
     } else {
       id = 1;
     }
-
     const newRecord = {
       id: id,
       exitDate: exitDate,
@@ -28,8 +27,12 @@ function App() {
       description: description,
       dateDifference: countDateDiff(exitDate, entryDate),
     };
-
     setRecords((prev) => [...prev, newRecord]);
+  };
+
+  const deleteRecordById = (id: number) => {
+    const updatedRecords = records.filter((record) => record.id !== id);
+    setRecords(updatedRecords);
   };
 
   const countDateDiff = (
@@ -56,8 +59,9 @@ function App() {
           <RecordCreate onCreate={createRecrod} />
           <DataDisplay records={records} />
         </div>
-        <div>{records.length}</div>
-        <RecordList records={records} />
+        {!!records.length && (
+          <RecordList records={records} onDelete={deleteRecordById} />
+        )}
       </div>
     </div>
   );
