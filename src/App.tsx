@@ -3,6 +3,7 @@ import RecordCreate from "./components/RecordCreate";
 import { LeavingRecord } from "./LeavingRecordType";
 import Nav from "./components/Nav";
 import RecordList from "./components/RecordList";
+import DataDisplay from "./components/DataDisplay";
 
 function App() {
   const [records, setRecords] = useState<LeavingRecord[]>([]);
@@ -41,16 +42,20 @@ function App() {
     const exitDateInTime = new Date(exitDate).getTime();
     const entryDateInTime = new Date(entryDate).getTime();
 
-    return (
-      Math.floor((entryDateInTime - exitDateInTime) / (24 * 3600 * 1000)) - 1
+    const dateDiff = Math.floor(
+      (entryDateInTime - exitDateInTime) / (24 * 3600 * 1000)
     );
+    return dateDiff - 1;
   };
 
   return (
     <div>
       <Nav />
       <div className="container mx-auto px-20">
-        <RecordCreate onCreate={createRecrod} />
+        <div className="flex flex-wrap justify-between items-center py-3">
+          <RecordCreate onCreate={createRecrod} />
+          <DataDisplay records={records} />
+        </div>
         <div>{records.length}</div>
         <RecordList records={records} />
       </div>

@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FC } from "react";
 import { DateType } from "../LeavingRecordType";
 import moment from "moment";
+import { convertDateToString } from "../helpers";
 
 type ReactCreateProps = {
   onCreate: (
@@ -20,7 +21,7 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
     const target = event.target as HTMLInputElement;
     setDates((prev) => ({
       ...prev,
-      [target.name]: moment(new Date(target.value)).format("YYYY-MM-DD"),
+      [target.name]: convertDateToString(new Date(target.value)),
     }));
   };
 
@@ -42,7 +43,7 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
   };
 
   const dateValue = (date: Date | undefined): string => {
-    return !date ? "" : moment(date).format("YYYY-MM-DD");
+    return !date ? "" : convertDateToString(date);
   };
 
   const clearState = () => {
@@ -95,7 +96,7 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
             max={
               !dates?.entryDate
                 ? undefined
-                : moment(dates.entryDate).format("YYYY-MM-DD")
+                : convertDateToString(dates.entryDate)
             }
           />
         </div>
@@ -115,9 +116,7 @@ const ReactCreate: FC<ReactCreateProps> = ({ onCreate }) => {
             name="entryDate"
             id="entryDate"
             min={
-              !dates?.exitDate
-                ? undefined
-                : moment(dates.exitDate).format("YYYY-MM-DD")
+              !dates?.exitDate ? undefined : convertDateToString(dates.exitDate)
             }
           />
         </div>

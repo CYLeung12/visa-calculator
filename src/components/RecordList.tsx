@@ -8,7 +8,10 @@ type RecordListProps = {
 };
 
 const RecordList: React.FC<RecordListProps> = ({ records }) => {
-  const listRecrods = records.map((r) => <RecordShow leavingRecord={r} />);
+  const listRecrods = records.map((r, index) => (
+    <RecordShow leavingRecord={r} index={index} />
+  ));
+
   return (
     <table className="rounded min-w-full table-auto">
       <thead className="bg-gray-100 text-left text-blue-700 border-b dark:border-neutral-500">
