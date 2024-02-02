@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import RecordCreate from "./components/RecordCreate";
-import { LeavingRecord } from "./LeavingRecordType";
 import Nav from "./components/Nav";
 import RecordList from "./components/RecordList";
 import DataDisplay from "./components/DataDisplay";
+import { countDateDiff } from "./helpers";
+import { RecordsContext, RecordsContextType } from "./RecordsContext";
 
 function App() {
-  const [records, setRecords] = useState<LeavingRecord[]>([]);
+  const { records, setRecords } = useContext(
+    RecordsContext
+  ) as RecordsContextType;
 
   const createRecrod = (
     exitDate: Date | undefined,
@@ -35,33 +38,15 @@ function App() {
     setRecords(updatedRecords);
   };
 
-  const countDateDiff = (
-    exitDate: Date | undefined,
-    entryDate: Date | undefined
-  ): number => {
-    if (!exitDate || !entryDate) {
-      return 0;
-    }
-    const exitDateInTime = new Date(exitDate).getTime();
-    const entryDateInTime = new Date(entryDate).getTime();
-
-    const dateDiff = Math.floor(
-      (entryDateInTime - exitDateInTime) / (24 * 3600 * 1000)
-    );
-    return dateDiff - 1;
-  };
-
   return (
     <div>
       <Nav />
       <div className="container mx-auto px-20">
         <div className="flex flex-wrap justify-between items-center py-3">
           <RecordCreate onCreate={createRecrod} />
-          <DataDisplay records={records} />
+          <DataDisplay />
         </div>
-        {!!records.length && (
-          <RecordList records={records} onDelete={deleteRecordById} />
-        )}
+        {!!records.length && <RecordList onDelete={deleteRecordById} />}
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
-import React from "react";
-import { LeavingRecord } from "../LeavingRecordType";
+import React, { useContext } from "react";
+import { countAbsenceTwelveMonths } from "../helpers";
+import { RecordsContext, RecordsContextType } from "../RecordsContext";
 
-type DataDisplayType = {
-  records: LeavingRecord[];
-};
+const DataDisplay: React.FC = () => {
+  const { records } = useContext(RecordsContext) as RecordsContextType;
 
-const DataDisplay: React.FC<DataDisplayType> = ({ records }) => {
   const totalAbsence = records.reduce(
     (total, { dateDifference }) => total + dateDifference,
     0
   );
+  const result = countAbsenceTwelveMonths(records);
 
   return (
     <div className="bg-blue-100 px-8 py-10 rounded-lg shadow h-fit">
@@ -36,6 +36,7 @@ const DataDisplay: React.FC<DataDisplayType> = ({ records }) => {
           <p className="text-sm">
             (There may be another periods with the same total absence days)
           </p>
+          {result[0]}
         </div>
       </div>
     </div>
